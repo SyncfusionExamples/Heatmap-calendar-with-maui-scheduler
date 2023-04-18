@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeatMapCalendar.MainPage"
+             xmlns:local="clr-namespace:HeatMapCalendar"
+             xmlns:schedule="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <local:SupportDetailsToColorConverter x:Key="colorConverter"/>
+            <local:SupportDetailsToTextColorConverter x:Key="textColorConverter"/>
+        </Grid.Resources>
+        <Grid.BindingContext>
+            <local:HeatmapViewModel/>
+        </Grid.BindingContext>
+        <schedule:SfScheduler x:Name="Scheduler"
+                                View="Month"
+                              AppointmentsSource="{Binding SupportDetails}"
+                              MaximumDateTime="{Binding MaxDate}"
+                                CellBorderBrush="Transparent">
+            <schedule:SfScheduler.AppointmentMapping>
+                <schedule:SchedulerAppointmentMapping
+                StartTime="Date"
+                EndTime="Date"/>
+            </schedule:SfScheduler.AppointmentMapping>
+            <schedule:SfScheduler.MonthView>
+                <schedule:SchedulerMonthView AppointmentDisplayMode="None" ShowLeadingAndTrailingDates="False">
+                    <schedule:SchedulerMonthView.CellTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="cellGrid" Background="{Binding Appointments, Converter={StaticResource colorConverter}}" Margin="0.25">
+                                <Label Text="{Binding DateTime.Day}" 
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="{Binding Appointments, Converter={StaticResource textColorConverter}}">
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </schedule:SchedulerMonthView.CellTemplate>
+                </schedule:SchedulerMonthView>
+            </schedule:SfScheduler.MonthView>
+        </schedule:SfScheduler>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" HorizontalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.4*"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Less" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="End" Grid.Row="0" FontAutoScalingEnabled="True"/>
+                <Label Text="More" TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="End" Grid.Row="0" FontAutoScalingEnabled="True"/>
+                <RoundRectangle Grid.Row="1" CornerRadius="2">
+                    <RoundRectangle.Fill>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="#dbe5f9" Offset="0.0" />
+                            <GradientStop Color="#82a2ea" Offset="0.3" />
+                            <GradientStop Color="#4071e0" Offset="0.6" />
+                            <GradientStop Color="#1e4cb4" Offset="0.8" />
+                            <GradientStop Color="#173c8d" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </RoundRectangle.Fill>
+                </RoundRectangle>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
