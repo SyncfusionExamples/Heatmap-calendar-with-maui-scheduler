@@ -35,27 +35,27 @@ public class HeatmapViewModel
             if (date.Day % 6 == 0)
             {
                 // 6, 12, 18, 24, 30
-                return 2500;
+                return 2248;
             }
             else if (date.Day % 5 == 0)
             {
                 // 5, 10, 15, 20, 25
-                return 1500;
+                return 1364;
             }
             else if (date.Day % 4 == 0)
             {
                 //  4, 8, 16, 24, 28
-                return 2000;
+                return 1976;
             }
             else if (date.Day % 3 == 0)
             {
                 // 3, 9, 18, 21, 27
-                return 500;
+                return 417;
             }
             else
             {
                 // 1, 2, 7, 11, 13, 19, 22, 23, 26, 29
-                return 1000;
+                return 891;
             }
         }
         else
@@ -63,27 +63,27 @@ public class HeatmapViewModel
             if (date.Day % 6 == 0)
             {
                 // 6, 12, 18, 24, 30
-                return 1000;
+                return 891;
             }
             else if (date.Day % 5 == 0)
             {
                 // 5, 10, 15, 20, 25
-                return 500;
+                return 417;
             }
             else if (date.Day % 4 == 0)
             {
                 //  4, 8, 16, 24, 28
-                return 1500;
+                return 1364;
             }
             else if (date.Day % 3 == 0)
             {
                 // 3, 9, 18, 21, 27
-                return 2500;
+                return 2248;
             }
             else
             {
                 // 1, 2, 7, 11, 13, 19, 22, 23, 26, 29
-                return 2000;
+                return 1976;
             }
         }
     }
