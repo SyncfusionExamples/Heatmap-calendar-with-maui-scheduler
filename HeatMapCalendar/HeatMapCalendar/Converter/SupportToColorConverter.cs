@@ -17,18 +17,23 @@ internal class SupportDetailsToColorConverter : IValueConverter
 
     }
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        ReadOnlyCollection<SchedulerAppointment>? appointments = (ReadOnlyCollection<SchedulerAppointment>?)value;
-        if (appointments == null || appointments.Count == 0)
+        if (value is not ReadOnlyCollection<SchedulerAppointment> appointments || appointments.Count == 0)
         {
             return Colors.Transparent;
         }
 
-        return this.GetColor((appointments[0].DataItem as SupportDetails).SupportCount);
+        var firstAppointment = appointments[0];
+        if (firstAppointment.DataItem is not SupportDetails supportDetails)
+        {
+            return Colors.Transparent;
+        }
+
+        return this.GetColor(supportDetails.SupportCount);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return null;
     }
