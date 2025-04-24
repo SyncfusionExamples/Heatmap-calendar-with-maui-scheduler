@@ -18,6 +18,7 @@
         </Grid.BindingContext>
         <schedule:SfScheduler x:Name="Scheduler"
                                 View="Month"
+                              x:DataType="local:HeatmapViewModel"
                               AppointmentsSource="{Binding SupportDetails}"
                               MaximumDateTime="{Binding MaxDate}"
                                 CellBorderBrush="Transparent">
@@ -30,8 +31,10 @@
                 <schedule:SchedulerMonthView AppointmentDisplayMode="None" ShowLeadingAndTrailingDates="False">
                     <schedule:SchedulerMonthView.CellTemplate>
                         <DataTemplate>
-                            <Grid x:Name="cellGrid" Background="{Binding Appointments, Converter={StaticResource colorConverter}}" Margin="0.25">
-                                <Label Text="{Binding DateTime.Day}" 
+                            <Grid x:Name="cellGrid" 
+                                  x:DataType="local:HeatmapViewModel"
+                                  Background="{Binding Appointments, Converter={StaticResource colorConverter}}" Margin="0.25">
+                                <Label Text="{Binding Day}" 
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center"
                                            TextColor="{Binding Appointments, Converter={StaticResource textColorConverter}}">

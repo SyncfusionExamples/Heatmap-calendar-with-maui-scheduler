@@ -1,14 +1,21 @@
-﻿namespace HeatMapCalendar;
+﻿using Syncfusion.Maui.Scheduler;
+
+namespace HeatMapCalendar;
 
 public class HeatmapViewModel
 {
-    public List<SupportDetails> SupportDetails { get; set; }
+    public List<SupportDetails>? SupportDetails { get; set; }
 
     public DateTime MaxDate { get; set; }
+    public DateTime Day { get; set; }
+
+    public SchedulerAppointment? Appointments { get; set; }
 
     public HeatmapViewModel()
     {
         this.MaxDate = DateTime.Today;
+        this.Day = DateTime.Today;
+        this.Appointments = new SchedulerAppointment();
         this.GenerateSupportDetails();
     }
 
